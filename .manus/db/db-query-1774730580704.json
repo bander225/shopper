@@ -1,0 +1,37 @@
+{
+  "query": "\n-- المطاعم اليدوية المفعّلة\nSELECT 'manual' as type, id, name, isAcceptingOrders, isOpen, streetId, cityId \nFROM restaurants \nWHERE isAcceptingOrders = 1\nUNION ALL\n-- مطاعم Google Place المفعّلة\nSELECT 'google' as type, id, name, isActive as isAcceptingOrders, 1 as isOpen, streetId, cityId\nFROM googlePlaceRestaurants\nWHERE isActive = 1;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \n-- المطاعم اليدوية المفعّلة\nSELECT 'manual' as type, id, name, isAcceptingOrders, isOpen, streetId, cityId \nFROM restaurants \nWHERE isAcceptingOrders = 1\nUNION ALL\n-- مطاعم Google Place المفعّلة\nSELECT 'google' as type, id, name, isActive as isAcceptingOrders, 1 as isOpen, streetId, cityId\nFROM googlePlaceRestaurants\nWHERE isActive = 1;\n",
+  "rows": [
+    {
+      "type": "google",
+      "id": "20",
+      "name": "La posto لابوستو‏",
+      "isAcceptingOrders": "1",
+      "isOpen": "1",
+      "streetId": "30001",
+      "cityId": "1"
+    },
+    {
+      "type": "google",
+      "id": "22",
+      "name": "bunrise",
+      "isAcceptingOrders": "1",
+      "isOpen": "1",
+      "streetId": "30001",
+      "cityId": "1"
+    },
+    {
+      "type": "google",
+      "id": "30020",
+      "name": "CORNER COFFEE | كورنر كافيه",
+      "isAcceptingOrders": "1",
+      "isOpen": "1",
+      "streetId": "30009",
+      "cityId": "2"
+    }
+  ],
+  "messages": [],
+  "stdout": "type\tid\tname\tisAcceptingOrders\tisOpen\tstreetId\tcityId\ngoogle\t20\tLa posto لابوستو‏\t1\t1\t30001\t1\ngoogle\t22\tbunrise\t1\t1\t30001\t1\ngoogle\t30020\tCORNER COFFEE | كورنر كافيه\t1\t1\t30009\t2\n",
+  "stderr": "",
+  "execution_time_ms": 1693
+}

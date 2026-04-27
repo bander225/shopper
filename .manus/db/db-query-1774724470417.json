@@ -1,0 +1,40 @@
+{
+  "query": "SELECT id, name, isActive, isOpen FROM googlePlaceRestaurants LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isActive, isOpen FROM googlePlaceRestaurants LIMIT 5;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "لوفت LOFT",
+      "isActive": "0",
+      "isOpen": "1"
+    },
+    {
+      "id": "2",
+      "name": "مطعم الميار",
+      "isActive": "0",
+      "isOpen": "1"
+    },
+    {
+      "id": "3",
+      "name": "قونيش كيك وكوفي البخاري",
+      "isActive": "0",
+      "isOpen": "1"
+    },
+    {
+      "id": "4",
+      "name": "واقيو برجر",
+      "isActive": "0",
+      "isOpen": "1"
+    },
+    {
+      "id": "5",
+      "name": "مطعم بيراديز الهندي - بريده peradiz",
+      "isActive": "0",
+      "isOpen": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisActive\tisOpen\n1\tلوفت LOFT\t0\t1\n2\tمطعم الميار\t0\t1\n3\tقونيش كيك وكوفي البخاري\t0\t1\n4\tواقيو برجر\t0\t1\n5\tمطعم بيراديز الهندي - بريده peradiz\t0\t1\n",
+  "stderr": "",
+  "execution_time_ms": 1583
+}

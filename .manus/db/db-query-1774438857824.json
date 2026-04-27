@@ -1,0 +1,16 @@
+{
+  "query": "SELECT id, name, phone, userId FROM drivers WHERE phone = '0557999999' OR phone = '557999999';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, phone, userId FROM drivers WHERE phone = '0557999999' OR phone = '557999999';",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "سعد خالد",
+      "phone": "0557999999",
+      "userId": "240003"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tphone\tuserId\n30001\tسعد خالد\t0557999999\t240003\n",
+  "stderr": "",
+  "execution_time_ms": 1819
+}

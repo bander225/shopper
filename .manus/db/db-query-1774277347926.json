@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO `cities` (`name`, `isActive`, `sortOrder`) VALUES\n('بريدة', true, 1),\n('عنيزة', true, 2);\n\nINSERT INTO `neighborhoods` (`cityId`, `name`, `isActive`, `sortOrder`) VALUES\n(1, 'الروضة', true, 1),\n(1, 'النزهة', true, 2),\n(1, 'الخبيب', true, 3),\n(1, 'العزيزية', true, 4),\n(1, 'الملك فهد', true, 5),\n(2, 'قبة عنيزة', true, 1),\n(2, 'الملك عبدالله', true, 2),\n(2, 'الورود', true, 3),\n(2, 'الصناعية', true, 4);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \nINSERT INTO `cities` (`name`, `isActive`, `sortOrder`) VALUES\n('بريدة', true, 1),\n('عنيزة', true, 2);\n\nINSERT INTO `neighborhoods` (`cityId`, `name`, `isActive`, `sortOrder`) VALUES\n(1, 'الروضة', true, 1),\n(1, 'النزهة', true, 2),\n(1, 'الخبيب', true, 3),\n(1, 'العزيزية', true, 4),\n(1, 'الملك فهد', true, 5),\n(2, 'قبة عنيزة', true, 1),\n(2, 'الملك عبدالله', true, 2),\n(2, 'الورود', true, 3),\n(2, 'الصناعية', true, 4);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1966
+}

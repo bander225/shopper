@@ -1,0 +1,22 @@
+CREATE TABLE `googlePlaceRestaurants` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`placeId` varchar(255) NOT NULL,
+	`name` varchar(255) NOT NULL,
+	`address` text,
+	`cityId` int,
+	`streetId` int,
+	`photoRef` text,
+	`rating` decimal(3,2),
+	`userRatingsTotal` int DEFAULT 0,
+	`types` text,
+	`isActive` boolean NOT NULL DEFAULT false,
+	`isOpen` boolean,
+	`discountEnabled` boolean NOT NULL DEFAULT false,
+	`discountPercent` int DEFAULT 0,
+	`discountLabel` varchar(100),
+	`discountExpiresAt` timestamp,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `googlePlaceRestaurants_id` PRIMARY KEY(`id`),
+	CONSTRAINT `googlePlaceRestaurants_placeId_unique` UNIQUE(`placeId`)
+);

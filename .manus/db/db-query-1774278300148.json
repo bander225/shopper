@@ -1,0 +1,34 @@
+{
+  "query": "\n-- إضافة المدن (بريدة وعنيزة موجودتان مسبقاً من البيانات الأولية)\nINSERT IGNORE INTO cities (name, isActive, sortOrder) VALUES\n('الأسياح', 1, 3),\n('قبة', 1, 4),\n('عيون الجواء', 1, 5);\n\n-- جلب IDs لإضافة الأحياء\nSELECT id, name FROM cities ORDER BY sortOrder;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \n-- إضافة المدن (بريدة وعنيزة موجودتان مسبقاً من البيانات الأولية)\nINSERT IGNORE INTO cities (name, isActive, sortOrder) VALUES\n('الأسياح', 1, 3),\n('قبة', 1, 4),\n('عيون الجواء', 1, 5);\n\n-- جلب IDs لإضافة الأحياء\nSELECT id, name FROM cities ORDER BY sortOrder;\n",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "الرياض"
+    },
+    {
+      "id": "1",
+      "name": "بريدة"
+    },
+    {
+      "id": "2",
+      "name": "عنيزة"
+    },
+    {
+      "id": "30002",
+      "name": "الأسياح"
+    },
+    {
+      "id": "30003",
+      "name": "قبة"
+    },
+    {
+      "id": "30004",
+      "name": "عيون الجواء"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\n30001\tالرياض\n1\tبريدة\n2\tعنيزة\n30002\tالأسياح\n30003\tقبة\n30004\tعيون الجواء\n",
+  "stderr": "",
+  "execution_time_ms": 1788
+}

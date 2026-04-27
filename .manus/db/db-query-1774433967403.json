@@ -1,0 +1,19 @@
+{
+  "query": "SELECT pu.id, pu.phone, pu.name, pu.role, d.id as driverId, d.name as driverName, d.phone as driverPhone FROM phoneUsers pu LEFT JOIN drivers d ON d.userId = pu.id OR d.phone = pu.phone WHERE pu.phone = '0557999999' OR d.name LIKE '%سعد%' LIMIT 5;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT pu.id, pu.phone, pu.name, pu.role, d.id as driverId, d.name as driverName, d.phone as driverPhone FROM phoneUsers pu LEFT JOIN drivers d ON d.userId = pu.id OR d.phone = pu.phone WHERE pu.phone = '0557999999' OR d.name LIKE '%سعد%' LIMIT 5;",
+  "rows": [
+    {
+      "id": "240003",
+      "phone": "0557999999",
+      "name": "سعد خالد",
+      "role": "driver",
+      "driverId": "30001",
+      "driverName": "سعد خالد",
+      "driverPhone": "0557999999"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tphone\tname\trole\tdriverId\tdriverName\tdriverPhone\n240003\t0557999999\tسعد خالد\tdriver\t30001\tسعد خالد\t0557999999\n",
+  "stderr": "",
+  "execution_time_ms": 1522
+}

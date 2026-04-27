@@ -1,0 +1,1 @@
+ALTER TABLE `orders` ADD `driverAssignStatus` enum('pending','assigned','no_driver','manual_needed') DEFAULT 'pending';

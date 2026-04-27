@@ -1,0 +1,1 @@
+ALTER TABLE `placeAnalysis` ADD `menuPhotoUrls` text;

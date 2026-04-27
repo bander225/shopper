@@ -1,0 +1,1 @@
+ALTER TABLE `phoneUsers` ADD `pinnedAddressCityName` varchar(150);

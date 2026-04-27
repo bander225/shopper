@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE `cities` ADD `isCovered` boolean DEFAULT false NOT NULL;\nALTER TABLE `cities` ADD `centerLat` decimal(10,7);\nALTER TABLE `cities` ADD `centerLng` decimal(10,7);\nALTER TABLE `cities` ADD `radiusKm` decimal(6,2) DEFAULT '10';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute ALTER TABLE `cities` ADD `isCovered` boolean DEFAULT false NOT NULL;\nALTER TABLE `cities` ADD `centerLat` decimal(10,7);\nALTER TABLE `cities` ADD `centerLng` decimal(10,7);\nALTER TABLE `cities` ADD `radiusKm` decimal(6,2) DEFAULT '10';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 3330
+}

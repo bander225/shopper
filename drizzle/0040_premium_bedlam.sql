@@ -1,0 +1,1 @@
+ALTER TABLE `phoneUsers` ADD `pinnedAddressCityId` int;

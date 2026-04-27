@@ -1,0 +1,398 @@
+// ===== SHOPPER BOOKINGS TAB =====
+function ShopperBookingsTab({ phoneUser }: { phoneUser: any }) {
+  const utils = trpc.useUtils();
+  const [selectedTripId, setSelectedTripId] = useState<number | null>(null);
+  const [expandedBookingId, setExpandedBookingId] = useState<number | null>(null);
+
+  const { data: myTrips, isLoading: tripsLoading, refetch: refetchTrips } = trpc.shopper.getMyTrips.useQuery(
+    { includeCompleted: false },
+    { enabled: !!phoneUser, refetchInterval: 10000 }
+  );
+  const { data: selectedTripBookings, isLoading: selectedBookingsLoading, refetch: refetchSelectedBookings } = trpc.shopper.getTripBookings.useQuery(
+    { tripId: selectedTripId ?? 0 },
+    { enabled: !!selectedTripId, refetchInterval: 8000 }
+  );
+
+  const acceptBookingMutation = trpc.shopper.acceptBooking.useMutation({
+    onSuccess: () => {
+      refetchSelectedBookings();
+      refetchTrips();
+      utils.shopper.getMyTrips.invalidate();
+      toast.success("✅ تم قبول الحجز");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const rejectBookingMutation = trpc.shopper.rejectBooking.useMutation({
+    onSuccess: () => {
+      refetchSelectedBookings();
+      refetchTrips();
+      utils.shopper.getMyTrips.invalidate();
+      toast.info("❌ تم رفض الحجز");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const acceptAllMutation = trpc.shopper.acceptAllPendingBookings.useMutation({
+    onSuccess: () => {
+      refetchSelectedBookings();
+      refetchTrips();
+      utils.shopper.getMyTrips.invalidate();
+      toast.success("✅ تم قبول جميع الحجوزات");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+  const updateBookingStatusMutation = trpc.shopper.updateBookingStatus.useMutation({
+    onSuccess: () => {
+      refetchSelectedBookings();
+      refetchTrips();
+      utils.shopper.getMyTrips.invalidate();
+      toast.success("تم تحديث حالة الحجز");
+    },
+    onError: (e: any) => toast.error(e.message),
+  });
+
+  const stLabel: Record<string, { label: string; bg: string; color: string; icon: string }> = {
+    pending:   { label: "بانتظار القبول", bg: "rgba(217,119,6,0.18)",  color: "#fbbf24", icon: "⏳" },
+    accepted:  { label: "مقبول",          bg: "rgba(37,99,235,0.18)",  color: "#60a5fa", icon: "✅" },
+    picked_up: { label: "تم الاستلام",    bg: "rgba(124,58,237,0.18)", color: "#a78bfa", icon: "📦" },
+    delivered: { label: "تم التسليم",     bg: "rgba(22,163,74,0.18)",  color: "#4ade80", icon: "🏁" },
+    cancelled: { label: "ملغي",           bg: "rgba(220,38,38,0.18)",  color: "#f87171", icon: "🚫" },
+    rejected:  { label: "مرفوض",          bg: "rgba(239,68,68,0.18)",  color: "#f87171", icon: "❌" },
+  };
+
+  const buildMapsUrl = (lat?: number | null, lng?: number | null, text?: string | null) => {
+    if (lat && lng) return `https://www.google.com/maps?q=${lat.toFixed(7)},${lng.toFixed(7)}`;
+    if (text) return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(text)}`;
+    return null;
+  };
+
+  const pendingBookings = (selectedTripBookings as any[] ?? []).filter((b: any) => b.booking.status === "pending");
+  const activeBookings  = (selectedTripBookings as any[] ?? []).filter((b: any) => ["accepted","picked_up"].includes(b.booking.status));
+  const doneBookings    = (selectedTripBookings as any[] ?? []).filter((b: any) => ["delivered","cancelled","rejected"].includes(b.booking.status));
+
+  if (!phoneUser) return (
+    <div dir="rtl" className="flex flex-col items-center justify-center py-20 px-6">
+      <Package className="w-12 h-12 mb-3" style={{color:'#6b7280'}} />
+      <p className="text-sm text-center" style={{color:'#9ca3af'}}>سجّل دخولك لعرض حجوزاتك</p>
+    </div>
+  );
+
+  return (
+    <div dir="rtl" className="pb-24 px-4 pt-4 space-y-4">
+      {/* ─── اختيار الرحلة ─── */}
+      <div className="rounded-2xl p-4" style={{ background: "rgba(124,58,237,0.12)", border: "1.5px solid rgba(167,139,250,0.3)" }}>
+        <div className="flex items-center gap-2 mb-3">
+          <Store className="w-4 h-4" style={{color:'#a78bfa'}} />
+          <span className="text-sm font-bold" style={{color:'#f0eeff'}}>اختر رحلة لإدارة حجوزاتها</span>
+        </div>
+        {tripsLoading ? (
+          <div className="flex justify-center py-3"><Loader2 className="w-5 h-5 animate-spin" style={{color:'#a78bfa'}} /></div>
+        ) : (myTrips as any[] ?? []).length === 0 ? (
+          <div className="text-center py-4">
+            <Package className="w-8 h-8 mx-auto mb-2" style={{color:'#6b7280'}} />
+            <p className="text-xs" style={{color:'#9ca3af'}}>لا توجد رحلات نشطة — أنشئ رحلة من تبويب "رحلاتي"</p>
+          </div>
+        ) : (
+          <Select value={selectedTripId?.toString() ?? ""} onValueChange={(v) => setSelectedTripId(Number(v))}>
+            <SelectTrigger className="rounded-xl" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(167,139,250,0.5)", color: '#f0eeff' }}>
+              <SelectValue placeholder="اختر رحلة..." />
+            </SelectTrigger>
+            <SelectContent>
+              {(myTrips as any[] ?? []).map((t: any) => {
+                const pending = t.pendingBookingsCount ?? 0;
+                return (
+                  <SelectItem key={t.id} value={t.id.toString()}>
+                    {t.fromCityName} → {t.toCityName}
+                    {pending > 0 ? ` 🔴 (${pending} بانتظار)` : ""}
+                    {" — "}{new Date(t.departureTime).toLocaleDateString("ar-SA", { weekday:"short", month:"short", day:"numeric" })}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
+        )}
+      </div>
+
+      {/* ─── محتوى الرحلة المختارة ─── */}
+      {selectedTripId && (
+        <>
+          {selectedBookingsLoading && (
+            <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" style={{color:'#a78bfa'}} /></div>
+          )}
+
+          {!selectedBookingsLoading && (selectedTripBookings as any[] ?? []).length === 0 && (
+            <div className="text-center py-12 rounded-2xl" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(167,139,250,0.15)" }}>
+              <Package className="w-12 h-12 mx-auto mb-3" style={{color:'#4b5563'}} />
+              <p className="font-bold text-sm" style={{color:'#9ca3af'}}>لا توجد حجوزات لهذه الرحلة بعد</p>
+              <p className="text-xs mt-1" style={{color:'#6b7280'}}>ستظهر حجوزات العملاء هنا عند وصولها</p>
+            </div>
+          )}
+
+          {/* ─── حجوزات بانتظار القبول ─── */}
+          {pendingBookings.length > 0 && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  <span className="text-sm font-bold" style={{color:'#fbbf24'}}>بانتظار القبول ({pendingBookings.length})</span>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => acceptAllMutation.mutate({ tripId: selectedTripId! })}
+                    disabled={acceptAllMutation.isPending}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95"
+                    style={{ background: "#16a34a", color: "#fff" }}>
+                    {acceptAllMutation.isPending ? "..." : "✅ قبول الكل"}
+                  </button>
+                  <button
+                    onClick={() => pendingBookings.forEach((b: any) => rejectBookingMutation.mutate({ bookingId: b.booking.id }))}
+                    disabled={rejectBookingMutation.isPending}
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95"
+                    style={{ background: "#dc2626", color: "#fff" }}>
+                    {rejectBookingMutation.isPending ? "..." : "❌ رفض الكل"}
+                  </button>
+                </div>
+              </div>
+              {pendingBookings.map((item: any) => {
+                const bk = item.booking; const cu = item.customer;
+                const pLat = bk.pickupLocationLat ? parseFloat(String(bk.pickupLocationLat)) : null;
+                const pLng = bk.pickupLocationLng ? parseFloat(String(bk.pickupLocationLng)) : null;
+                const dLat = bk.deliveryLocationLat ? parseFloat(String(bk.deliveryLocationLat)) : null;
+                const dLng = bk.deliveryLocationLng ? parseFloat(String(bk.deliveryLocationLng)) : null;
+                const pickupUrl = buildMapsUrl(pLat, pLng, bk.pickupLocationText);
+                const deliveryUrl = buildMapsUrl(dLat, dLng, bk.deliveryLocationText);
+                const isExpanded = expandedBookingId === bk.id;
+                return (
+                  <div key={bk.id} className="rounded-2xl overflow-hidden" style={{ background: "rgba(217,119,6,0.08)", border: "2px solid rgba(251,191,36,0.4)" }}>
+                    {/* رأس البطاقة */}
+                    <div className="px-4 py-3 flex items-center justify-between cursor-pointer" onClick={() => setExpandedBookingId(isExpanded ? null : bk.id)}
+                      style={{ background: "rgba(217,119,6,0.15)", borderBottom: "1px solid rgba(251,191,36,0.2)" }}>
+                      <div className="flex items-center gap-2">
+                        <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black text-white" style={{ background: "#7c3aed" }}>{cu?.name?.charAt(0) || "؟"}</div>
+                        <div>
+                          <div className="text-sm font-bold" style={{color:'#f0eeff'}}>{cu?.name || "عميل"}</div>
+                          {cu?.phone && (
+                            <a href={`tel:${cu.phone}`} className="text-xs flex items-center gap-1" style={{color:'#60a5fa'}} onClick={e => e.stopPropagation()}>
+                              <Phone className="w-3 h-3" />{cu.phone}
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {bk.deliveryFee && <span className="text-sm font-black" style={{color:'#4ade80'}}>{bk.deliveryFee} ر.س</span>}
+                        <span className="text-xs px-2 py-1 rounded-full font-bold" style={{ background: "rgba(251,191,36,0.2)", color: "#fbbf24" }}>⏳ بانتظار</span>
+                        <ChevronDown className="w-4 h-4 transition-transform" style={{color:'#9ca3af', transform: isExpanded ? 'rotate(180deg)' : 'none'}} />
+                      </div>
+                    </div>
+                    {/* تفاصيل موسعة */}
+                    {isExpanded && (
+                      <div className="px-4 py-3 space-y-3">
+                        {/* موقع الاستلام */}
+                        {(bk.pickupLocationText || pickupUrl) && (
+                          <div className="rounded-xl p-3 space-y-2" style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(74,222,128,0.25)" }}>
+                            <p className="text-xs font-bold" style={{color:'#4ade80'}}>📍 موقع الاستلام</p>
+                            {bk.pickupLocationText && <p className="text-xs" style={{color:'#e9d5ff'}}>{bk.pickupLocationText}</p>}
+                            {pickupUrl && (
+                              <a href={pickupUrl} target="_blank" rel="noreferrer"
+                                className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-xs font-bold"
+                                style={{ background: "#ea4335", color: "#fff" }}>
+                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                افتح في خرائط Google
+                              </a>
+                            )}
+                          </div>
+                        )}
+                        {/* موقع التسليم */}
+                        {(bk.deliveryLocationText || deliveryUrl) && (
+                          <div className="rounded-xl p-3 space-y-2" style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(248,113,113,0.25)" }}>
+                            <p className="text-xs font-bold" style={{color:'#f87171'}}>🏠 موقع التسليم</p>
+                            {bk.deliveryLocationText && <p className="text-xs" style={{color:'#e9d5ff'}}>{bk.deliveryLocationText}</p>}
+                            {deliveryUrl && (
+                              <a href={deliveryUrl} target="_blank" rel="noreferrer"
+                                className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-xs font-bold"
+                                style={{ background: "#ea4335", color: "#fff" }}>
+                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                افتح في خرائط Google
+                              </a>
+                            )}
+                          </div>
+                        )}
+                        {/* ملاحظات */}
+                        {bk.notes && (
+                          <div className="rounded-xl p-3" style={{ background: "rgba(167,139,250,0.08)", border: "1px solid rgba(167,139,250,0.2)" }}>
+                            <p className="text-xs font-bold mb-1" style={{color:'#c4b5fd'}}>📝 ملاحظات العميل</p>
+                            <p className="text-xs italic" style={{color:'#e9d5ff'}}>"{bk.notes}"</p>
+                          </div>
+                        )}
+                        {/* واتساب */}
+                        {cu?.phone && (
+                          <a href={`https://wa.me/${cu.phone.replace(/^0/, '966')}`} target="_blank" rel="noreferrer"
+                            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold"
+                            style={{ background: "#16a34a", color: "#fff" }}>
+                            <MessageCircle className="w-4 h-4" />تواصل عبر واتساب
+                          </a>
+                        )}
+                      </div>
+                    )}
+                    {/* أزرار القبول/الرفض */}
+                    <div className="px-4 pb-4 flex gap-3">
+                      <button
+                        onClick={() => acceptBookingMutation.mutate({ bookingId: bk.id })}
+                        disabled={acceptBookingMutation.isPending}
+                        className="flex-1 py-3 rounded-xl text-sm font-black transition-all active:scale-95 disabled:opacity-50"
+                        style={{ background: "linear-gradient(135deg,#16a34a,#15803d)", color: "#fff", boxShadow: "0 4px 12px rgba(22,163,74,0.4)" }}>
+                        {acceptBookingMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "✅ قبول"}
+                      </button>
+                      <button
+                        onClick={() => rejectBookingMutation.mutate({ bookingId: bk.id })}
+                        disabled={rejectBookingMutation.isPending}
+                        className="flex-1 py-3 rounded-xl text-sm font-black transition-all active:scale-95 disabled:opacity-50"
+                        style={{ background: "linear-gradient(135deg,#dc2626,#b91c1c)", color: "#fff", boxShadow: "0 4px 12px rgba(220,38,38,0.4)" }}>
+                        {rejectBookingMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "❌ رفض"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ─── حجوزات نشطة ─── */}
+          {activeBookings.length > 0 && (
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <span className="text-sm font-bold" style={{color:'#60a5fa'}}>جارية ({activeBookings.length})</span>
+              </div>
+              {activeBookings.map((item: any) => {
+                const bk = item.booking; const cu = item.customer;
+                const st = stLabel[bk.status] ?? { label: bk.status, bg: "rgba(107,114,128,0.18)", color: "#9ca3af", icon: "📦" };
+                const pLat = bk.pickupLocationLat ? parseFloat(String(bk.pickupLocationLat)) : null;
+                const pLng = bk.pickupLocationLng ? parseFloat(String(bk.pickupLocationLng)) : null;
+                const dLat = bk.deliveryLocationLat ? parseFloat(String(bk.deliveryLocationLat)) : null;
+                const dLng = bk.deliveryLocationLng ? parseFloat(String(bk.deliveryLocationLng)) : null;
+                const pickupUrl = buildMapsUrl(pLat, pLng, bk.pickupLocationText);
+                const deliveryUrl = buildMapsUrl(dLat, dLng, bk.deliveryLocationText);
+                const isExpanded = expandedBookingId === bk.id;
+                return (
+                  <div key={bk.id} className="rounded-2xl overflow-hidden" style={{ background: "rgba(37,99,235,0.08)", border: "1.5px solid rgba(96,165,250,0.3)" }}>
+                    <div className="px-4 py-3 flex items-center justify-between cursor-pointer" onClick={() => setExpandedBookingId(isExpanded ? null : bk.id)}
+                      style={{ background: "rgba(37,99,235,0.15)", borderBottom: "1px solid rgba(96,165,250,0.2)" }}>
+                      <div className="flex items-center gap-2">
+                        <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black text-white" style={{ background: "#7c3aed" }}>{cu?.name?.charAt(0) || "؟"}</div>
+                        <div>
+                          <div className="text-sm font-bold" style={{color:'#f0eeff'}}>{cu?.name || "عميل"}</div>
+                          {cu?.phone && (
+                            <a href={`tel:${cu.phone}`} className="text-xs flex items-center gap-1" style={{color:'#60a5fa'}} onClick={e => e.stopPropagation()}>
+                              <Phone className="w-3 h-3" />{cu.phone}
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {bk.deliveryFee && <span className="text-sm font-black" style={{color:'#4ade80'}}>{bk.deliveryFee} ر.س</span>}
+                        <span className="text-xs px-2 py-1 rounded-full font-bold" style={{ background: st.bg, color: st.color }}>{st.icon} {st.label}</span>
+                        <ChevronDown className="w-4 h-4 transition-transform" style={{color:'#9ca3af', transform: isExpanded ? 'rotate(180deg)' : 'none'}} />
+                      </div>
+                    </div>
+                    {isExpanded && (
+                      <div className="px-4 py-3 space-y-3">
+                        {(bk.pickupLocationText || pickupUrl) && (
+                          <div className="rounded-xl p-3 space-y-2" style={{ background: "rgba(34,197,94,0.08)", border: "1px solid rgba(74,222,128,0.25)" }}>
+                            <p className="text-xs font-bold" style={{color:'#4ade80'}}>📍 موقع الاستلام</p>
+                            {bk.pickupLocationText && <p className="text-xs" style={{color:'#e9d5ff'}}>{bk.pickupLocationText}</p>}
+                            {pickupUrl && (
+                              <a href={pickupUrl} target="_blank" rel="noreferrer"
+                                className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-xs font-bold"
+                                style={{ background: "#ea4335", color: "#fff" }}>
+                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                افتح في خرائط Google
+                              </a>
+                            )}
+                          </div>
+                        )}
+                        {(bk.deliveryLocationText || deliveryUrl) && (
+                          <div className="rounded-xl p-3 space-y-2" style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(248,113,113,0.25)" }}>
+                            <p className="text-xs font-bold" style={{color:'#f87171'}}>🏠 موقع التسليم</p>
+                            {bk.deliveryLocationText && <p className="text-xs" style={{color:'#e9d5ff'}}>{bk.deliveryLocationText}</p>}
+                            {deliveryUrl && (
+                              <a href={deliveryUrl} target="_blank" rel="noreferrer"
+                                className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-xs font-bold"
+                                style={{ background: "#ea4335", color: "#fff" }}>
+                                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                                افتح في خرائط Google
+                              </a>
+                            )}
+                          </div>
+                        )}
+                        {bk.notes && (
+                          <div className="rounded-xl p-3" style={{ background: "rgba(167,139,250,0.08)", border: "1px solid rgba(167,139,250,0.2)" }}>
+                            <p className="text-xs font-bold mb-1" style={{color:'#c4b5fd'}}>📝 ملاحظات</p>
+                            <p className="text-xs italic" style={{color:'#e9d5ff'}}>"{bk.notes}"</p>
+                          </div>
+                        )}
+                        {cu?.phone && (
+                          <a href={`https://wa.me/${cu.phone.replace(/^0/, '966')}`} target="_blank" rel="noreferrer"
+                            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-bold"
+                            style={{ background: "#16a34a", color: "#fff" }}>
+                            <MessageCircle className="w-4 h-4" />تواصل عبر واتساب
+                          </a>
+                        )}
+                      </div>
+                    )}
+                    <div className="px-4 pb-4">
+                      {bk.status === "accepted" && (
+                        <button
+                          onClick={() => updateBookingStatusMutation.mutate({ bookingId: bk.id, status: "picked_up" })}
+                          disabled={updateBookingStatusMutation.isPending}
+                          className="w-full py-3 rounded-xl text-sm font-black transition-all active:scale-95 disabled:opacity-50"
+                          style={{ background: "linear-gradient(135deg,#2563eb,#1d4ed8)", color: "#fff", boxShadow: "0 4px 12px rgba(37,99,235,0.4)" }}>
+                          {updateBookingStatusMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "📦 تم الاستلام من المتجر"}
+                        </button>
+                      )}
+                      {bk.status === "picked_up" && (
+                        <button
+                          onClick={() => updateBookingStatusMutation.mutate({ bookingId: bk.id, status: "delivered" })}
+                          disabled={updateBookingStatusMutation.isPending}
+                          className="w-full py-3 rounded-xl text-sm font-black transition-all active:scale-95 disabled:opacity-50"
+                          style={{ background: "linear-gradient(135deg,#16a34a,#15803d)", color: "#fff", boxShadow: "0 4px 12px rgba(22,163,74,0.4)" }}>
+                          {updateBookingStatusMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "✅ تم التسليم للعميل"}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* ─── حجوزات مكتملة/ملغاة ─── */}
+          {doneBookings.length > 0 && (
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-gray-400" />
+                <span className="text-sm font-bold" style={{color:'#9ca3af'}}>مكتملة / ملغاة ({doneBookings.length})</span>
+              </div>
+              {doneBookings.map((item: any) => {
+                const bk = item.booking; const cu = item.customer;
+                const st = stLabel[bk.status] ?? { label: bk.status, bg: "rgba(107,114,128,0.18)", color: "#9ca3af", icon: "📦" };
+                return (
+                  <div key={bk.id} className="rounded-xl px-4 py-3 flex items-center justify-between opacity-70"
+                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-black text-white" style={{ background: "#4b5563" }}>{cu?.name?.charAt(0) || "؟"}</div>
+                      <div>
+                        <div className="text-xs font-bold" style={{color:'#d1d5db'}}>{cu?.name || "عميل"}</div>
+                        {bk.deliveryFee && <div className="text-xs" style={{color:'#6b7280'}}>{bk.deliveryFee} ر.س</div>}
+                      </div>
+                    </div>
+                    <span className="text-xs px-2 py-1 rounded-full font-bold" style={{ background: st.bg, color: st.color }}>{st.icon} {st.label}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}

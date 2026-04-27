@@ -1,0 +1,8 @@
+{
+  "query": "SELECT dc.*, c.name as cityName, s.name as streetName FROM driver_coverage dc LEFT JOIN cities c ON dc.cityId = c.id LEFT JOIN streets s ON dc.streetId = s.id WHERE dc.driverId = 90001;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT dc.*, c.name as cityName, s.name as streetName FROM driver_coverage dc LEFT JOIN cities c ON dc.cityId = c.id LEFT JOIN streets s ON dc.streetId = s.id WHERE dc.driverId = 90001;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1146 (42S02) at line 1: Table 'nk9l9nabddkktqdnwgy78j.driver_coverage' doesn't exist"
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `googlePlaceRestaurants` ADD `coverImageUrl` text;

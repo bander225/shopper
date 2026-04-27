@@ -1,0 +1,1 @@
+ALTER TABLE `shopperTrips` ADD `bookingDeadline` timestamp;

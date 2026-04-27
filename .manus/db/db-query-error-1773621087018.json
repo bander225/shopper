@@ -1,0 +1,8 @@
+{
+  "query": "\nALTER TABLE restaurants \n  ADD COLUMN logoUrl TEXT NULL AFTER imageUrl,\n  ADD COLUMN menuImageUrl TEXT NULL AFTER logoUrl;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \nALTER TABLE restaurants \n  ADD COLUMN logoUrl TEXT NULL AFTER imageUrl,\n  ADD COLUMN menuImageUrl TEXT NULL AFTER logoUrl;\n",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 2: Unknown column 'logourl' in 'restaurants'"
+  ]
+}

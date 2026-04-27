@@ -1,0 +1,86 @@
+{
+  "query": "\n-- حذف مدينة الرياض (غير مطلوبة)\nDELETE FROM cities WHERE id = 30001;\n\n-- إضافة أحياء لمدينة الأسياح (id=30002)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30002, 'حي الملك فهد', 1, 1),\n(30002, 'حي النزهة', 1, 2),\n(30002, 'حي الروضة', 1, 3),\n(30002, 'وسط الأسياح', 1, 4);\n\n-- إضافة أحياء لمدينة قبة (id=30003)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30003, 'حي الملك فهد', 1, 1),\n(30003, 'حي النزهة', 1, 2),\n(30003, 'وسط قبة', 1, 3);\n\n-- إضافة أحياء لمدينة عيون الجواء (id=30004)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30004, 'حي الملك فهد', 1, 1),\n(30004, 'حي النزهة', 1, 2),\n(30004, 'وسط عيون الجواء', 1, 3);\n\nSELECT c.name as city, n.name as neighborhood FROM neighborhoods n JOIN cities c ON n.cityId = c.id ORDER BY c.sortOrder, n.sortOrder;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \n-- حذف مدينة الرياض (غير مطلوبة)\nDELETE FROM cities WHERE id = 30001;\n\n-- إضافة أحياء لمدينة الأسياح (id=30002)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30002, 'حي الملك فهد', 1, 1),\n(30002, 'حي النزهة', 1, 2),\n(30002, 'حي الروضة', 1, 3),\n(30002, 'وسط الأسياح', 1, 4);\n\n-- إضافة أحياء لمدينة قبة (id=30003)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30003, 'حي الملك فهد', 1, 1),\n(30003, 'حي النزهة', 1, 2),\n(30003, 'وسط قبة', 1, 3);\n\n-- إضافة أحياء لمدينة عيون الجواء (id=30004)\nINSERT INTO neighborhoods (cityId, name, isActive, sortOrder) VALUES\n(30004, 'حي الملك فهد', 1, 1),\n(30004, 'حي النزهة', 1, 2),\n(30004, 'وسط عيون الجواء', 1, 3);\n\nSELECT c.name as city, n.name as neighborhood FROM neighborhoods n JOIN cities c ON n.cityId = c.id ORDER BY c.sortOrder, n.sortOrder;\n",
+  "rows": [
+    {
+      "city": "بريدة",
+      "neighborhood": "الروضة"
+    },
+    {
+      "city": "بريدة",
+      "neighborhood": "النزهة"
+    },
+    {
+      "city": "بريدة",
+      "neighborhood": "الخبيب"
+    },
+    {
+      "city": "بريدة",
+      "neighborhood": "العزيزية"
+    },
+    {
+      "city": "بريدة",
+      "neighborhood": "الملك فهد"
+    },
+    {
+      "city": "عنيزة",
+      "neighborhood": "قبة عنيزة"
+    },
+    {
+      "city": "عنيزة",
+      "neighborhood": "الملك عبدالله"
+    },
+    {
+      "city": "عنيزة",
+      "neighborhood": "الورود"
+    },
+    {
+      "city": "عنيزة",
+      "neighborhood": "الصناعية"
+    },
+    {
+      "city": "الأسياح",
+      "neighborhood": "حي الملك فهد"
+    },
+    {
+      "city": "الأسياح",
+      "neighborhood": "حي النزهة"
+    },
+    {
+      "city": "الأسياح",
+      "neighborhood": "حي الروضة"
+    },
+    {
+      "city": "الأسياح",
+      "neighborhood": "وسط الأسياح"
+    },
+    {
+      "city": "قبة",
+      "neighborhood": "حي الملك فهد"
+    },
+    {
+      "city": "قبة",
+      "neighborhood": "حي النزهة"
+    },
+    {
+      "city": "قبة",
+      "neighborhood": "وسط قبة"
+    },
+    {
+      "city": "عيون الجواء",
+      "neighborhood": "حي الملك فهد"
+    },
+    {
+      "city": "عيون الجواء",
+      "neighborhood": "حي النزهة"
+    },
+    {
+      "city": "عيون الجواء",
+      "neighborhood": "وسط عيون الجواء"
+    }
+  ],
+  "messages": [],
+  "stdout": "city\tneighborhood\nبريدة\tالروضة\nبريدة\tالنزهة\nبريدة\tالخبيب\nبريدة\tالعزيزية\nبريدة\tالملك فهد\nعنيزة\tقبة عنيزة\nعنيزة\tالملك عبدالله\nعنيزة\tالورود\nعنيزة\tالصناعية\nالأسياح\tحي الملك فهد\nالأسياح\tحي النزهة\nالأسياح\tحي الروضة\nالأسياح\tوسط الأسياح\nقبة\tحي الملك فهد\nقبة\tحي النزهة\nقبة\tوسط قبة\nعيون الجواء\tحي الملك فهد\nعيون الجواء\tحي النزهة\nعيون الجواء\tوسط عيون الجواء\n",
+  "stderr": "",
+  "execution_time_ms": 2388
+}

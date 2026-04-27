@@ -1,0 +1,1 @@
+ALTER TABLE `shopperTrips` ADD `shopperTripType` enum('group','express') DEFAULT 'group' NOT NULL;

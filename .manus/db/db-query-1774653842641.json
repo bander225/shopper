@@ -1,0 +1,80 @@
+{
+  "query": "SELECT id, cityId, name FROM streets ORDER BY cityId, id",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, cityId, name FROM streets ORDER BY cityId, id",
+  "rows": [
+    {
+      "id": "1",
+      "cityId": "1",
+      "name": "شارع عمر بن الخطاب"
+    },
+    {
+      "id": "2",
+      "cityId": "1",
+      "name": "شارع عثمان بن عفان"
+    },
+    {
+      "id": "3",
+      "cityId": "1",
+      "name": "شارع البخاري"
+    },
+    {
+      "id": "4",
+      "cityId": "1",
+      "name": "شارع الملك فهد"
+    },
+    {
+      "id": "5",
+      "cityId": "1",
+      "name": "شارع الأمير سلطان"
+    },
+    {
+      "id": "6",
+      "cityId": "2",
+      "name": "شارع عمر بن الخطاب"
+    },
+    {
+      "id": "7",
+      "cityId": "2",
+      "name": "شارع الملك عبدالعزيز"
+    },
+    {
+      "id": "8",
+      "cityId": "2",
+      "name": "شارع الأمير نايف"
+    },
+    {
+      "id": "9",
+      "cityId": "30002",
+      "name": "شارع الملك فهد"
+    },
+    {
+      "id": "10",
+      "cityId": "30002",
+      "name": "شارع عمر بن الخطاب"
+    },
+    {
+      "id": "11",
+      "cityId": "30003",
+      "name": "شارع الملك فهد"
+    },
+    {
+      "id": "12",
+      "cityId": "30003",
+      "name": "شارع عثمان بن عفان"
+    },
+    {
+      "id": "13",
+      "cityId": "30004",
+      "name": "شارع الملك فهد"
+    },
+    {
+      "id": "14",
+      "cityId": "30004",
+      "name": "شارع عمر بن الخطاب"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tcityId\tname\n1\t1\tشارع عمر بن الخطاب\n2\t1\tشارع عثمان بن عفان\n3\t1\tشارع البخاري\n4\t1\tشارع الملك فهد\n5\t1\tشارع الأمير سلطان\n6\t2\tشارع عمر بن الخطاب\n7\t2\tشارع الملك عبدالعزيز\n8\t2\tشارع الأمير نايف\n9\t30002\tشارع الملك فهد\n10\t30002\tشارع عمر بن الخطاب\n11\t30003\tشارع الملك فهد\n12\t30003\tشارع عثمان بن عفان\n13\t30004\tشارع الملك فهد\n14\t30004\tشارع عمر بن الخطاب\n",
+  "stderr": "",
+  "execution_time_ms": 1547
+}

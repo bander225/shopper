@@ -1,0 +1,1 @@
+ALTER TABLE `cities` ADD `deliveryFee` decimal(8,2) DEFAULT '0' NOT NULL;

@@ -1,0 +1,50 @@
+{
+  "query": "\nSELECT \n  s.id, \n  s.name,\n  (SELECT COUNT(*) FROM restaurants r WHERE r.streetId = s.id AND r.isAcceptingOrders = 1) + \n  (SELECT COUNT(*) FROM googlePlaceRestaurants g WHERE g.streetId = s.id AND g.isActive = 1) as restaurantCount\nFROM streets s\nWHERE s.cityId = 1\nORDER BY s.sortOrder, s.name\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \nSELECT \n  s.id, \n  s.name,\n  (SELECT COUNT(*) FROM restaurants r WHERE r.streetId = s.id AND r.isAcceptingOrders = 1) + \n  (SELECT COUNT(*) FROM googlePlaceRestaurants g WHERE g.streetId = s.id AND g.isActive = 1) as restaurantCount\nFROM streets s\nWHERE s.cityId = 1\nORDER BY s.sortOrder, s.name\n",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "شارع البخاري",
+      "restaurantCount": "2"
+    },
+    {
+      "id": "30002",
+      "name": "طريق عثمان بن عفان",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30003",
+      "name": "شارع الملك فهد",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30004",
+      "name": "شارع الأمير سلطان",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30005",
+      "name": "شارع الصناعة",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30006",
+      "name": "شارع المشاغل",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30007",
+      "name": "شارع المياه",
+      "restaurantCount": "0"
+    },
+    {
+      "id": "30008",
+      "name": "طريق الملك عبدالعزيز",
+      "restaurantCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\trestaurantCount\n30001\tشارع البخاري\t2\n30002\tطريق عثمان بن عفان\t0\n30003\tشارع الملك فهد\t0\n30004\tشارع الأمير سلطان\t0\n30005\tشارع الصناعة\t0\n30006\tشارع المشاغل\t0\n30007\tشارع المياه\t0\n30008\tطريق الملك عبدالعزيز\t0\n",
+  "stderr": "",
+  "execution_time_ms": 1510
+}

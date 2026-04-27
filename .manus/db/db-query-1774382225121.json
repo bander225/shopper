@@ -1,0 +1,55 @@
+{
+  "query": "SELECT id, name, isCovered, centerLat, centerLng, radiusKm, deliveryFee FROM cities;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isCovered, centerLat, centerLng, radiusKm, deliveryFee FROM cities;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "بريدة",
+      "isCovered": "0",
+      "centerLat": "NULL",
+      "centerLng": "NULL",
+      "radiusKm": "10.00",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "2",
+      "name": "عنيزة",
+      "isCovered": "0",
+      "centerLat": "NULL",
+      "centerLng": "NULL",
+      "radiusKm": "10.00",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "30002",
+      "name": "الأسياح",
+      "isCovered": "1",
+      "centerLat": "26.8182970",
+      "centerLng": "44.2012190",
+      "radiusKm": "10.00",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "30003",
+      "name": "قبة",
+      "isCovered": "1",
+      "centerLat": "27.3817280",
+      "centerLng": "44.3817190",
+      "radiusKm": "10.00",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "30004",
+      "name": "عيون الجواء",
+      "isCovered": "0",
+      "centerLat": "NULL",
+      "centerLng": "NULL",
+      "radiusKm": "10.00",
+      "deliveryFee": "0.00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisCovered\tcenterLat\tcenterLng\tradiusKm\tdeliveryFee\n1\tبريدة\t0\tNULL\tNULL\t10.00\t0.00\n2\tعنيزة\t0\tNULL\tNULL\t10.00\t0.00\n30002\tالأسياح\t1\t26.8182970\t44.2012190\t10.00\t0.00\n30003\tقبة\t1\t27.3817280\t44.3817190\t10.00\t0.00\n30004\tعيون الجواء\t0\tNULL\tNULL\t10.00\t0.00\n",
+  "stderr": "",
+  "execution_time_ms": 1582
+}

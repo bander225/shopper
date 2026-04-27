@@ -1,0 +1,1 @@
+ALTER TABLE `cityPolygons` ADD `usageCount` int DEFAULT 0 NOT NULL;

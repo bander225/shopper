@@ -1,0 +1,1 @@
+ALTER TABLE `menuItems` ADD `discountPrice` decimal(8,2);

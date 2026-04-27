@@ -1,0 +1,704 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ===== نظام الألوان الموحد: بنفسجي داكن فخم ===== */
+:root {
+  --radius: 0.75rem;
+
+  /* اللون الأساسي: بنفسجي */
+  --primary: oklch(0.55 0.22 290);
+  --primary-foreground: oklch(1 0 0);
+
+  /* الخلفية: داكنة بنفسجية */
+  --background: oklch(0.13 0.04 280);
+  --foreground: oklch(0.95 0.01 280);
+
+  /* البطاقات */
+  --card: oklch(0.18 0.04 280);
+  --card-foreground: oklch(0.95 0.01 280);
+
+  /* القائمة المنبثقة */
+  --popover: oklch(0.18 0.04 280);
+  --popover-foreground: oklch(0.95 0.01 280);
+
+  /* الثانوي */
+  --secondary: oklch(0.22 0.04 280);
+  --secondary-foreground: oklch(0.9 0.01 280);
+
+  /* المكتوم */
+  --muted: oklch(0.22 0.04 280);
+  --muted-foreground: oklch(0.6 0.02 280);
+
+  /* التمييز */
+  --accent: oklch(0.28 0.06 290);
+  --accent-foreground: oklch(0.9 0.01 280);
+
+  /* التدمير */
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  /* الحدود والمدخلات */
+  --border: oklch(0.28 0.04 280);
+  --input: oklch(0.22 0.04 280);
+  --ring: oklch(0.55 0.22 290);
+
+  /* الرسوم البيانية */
+  --chart-1: oklch(0.55 0.22 290);
+  --chart-2: oklch(0.6 0.18 220);
+  --chart-3: oklch(0.55 0.15 200);
+  --chart-4: oklch(0.65 0.2 50);
+  --chart-5: oklch(0.7 0.15 160);
+
+  /* الشريط الجانبي */
+  --sidebar: oklch(0.10 0.04 280);
+  --sidebar-foreground: oklch(0.95 0.01 280);
+  --sidebar-primary: oklch(0.55 0.22 290);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.20 0.04 280);
+  --sidebar-accent-foreground: oklch(0.9 0.01 280);
+  --sidebar-border: oklch(0.22 0.04 280);
+  --sidebar-ring: oklch(0.55 0.22 290);
+}
+
+/* وضع فاتح (للوحة الإدارة) */
+.light-mode {
+  --primary: oklch(0.55 0.22 290);
+  --primary-foreground: oklch(1 0 0);
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.12 0.01 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.12 0.01 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0.01 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.2 0.01 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.5 0.01 0);
+  --accent: oklch(0.94 0.02 290);
+  --accent-foreground: oklch(0.55 0.22 290);
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.55 0.22 290);
+  --sidebar: oklch(0.11 0.04 280);
+  --sidebar-foreground: oklch(0.95 0.01 280);
+  --sidebar-accent: oklch(0.20 0.04 280);
+  --sidebar-accent-foreground: oklch(0.9 0.01 280);
+  --sidebar-border: oklch(0.22 0.04 280);
+  --sidebar-ring: oklch(0.55 0.22 290);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    direction: rtl;
+    font-family: 'Tajawal', 'Cairo', system-ui, sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+
+  /* بطاقة موحدة */
+  .app-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(167,139,250,0.15);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+  }
+  .app-card:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(167,139,250,0.3);
+  }
+
+  /* زر أساسي موحد */
+  .app-btn-primary {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: white;
+    font-weight: 700;
+    border-radius: 0.875rem;
+    box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .app-btn-primary:hover {
+    box-shadow: 0 12px 32px rgba(124,58,237,0.5);
+    transform: translateY(-1px);
+  }
+  .app-btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  /* زر ثانوي موحد */
+  .app-btn-secondary {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(167,139,250,0.3);
+    color: #c4b5fd;
+    font-weight: 600;
+    border-radius: 0.875rem;
+    backdrop-filter: blur(10px);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .app-btn-secondary:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(167,139,250,0.5);
+  }
+
+  /* حقل إدخال موحد */
+  .app-input {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(167,139,250,0.2);
+    color: white;
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+  .app-input:focus {
+    outline: none;
+    border-color: rgba(167,139,250,0.6);
+    background: rgba(255,255,255,0.09);
+  }
+  .app-input::placeholder {
+    color: rgba(196,181,253,0.5);
+  }
+
+  /* شارة حالة */
+  .app-badge-success {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .app-badge-warning {
+    background: rgba(234,179,8,0.15);
+    color: #facc15;
+    border: 1px solid rgba(234,179,8,0.3);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .app-badge-danger {
+    background: rgba(239,68,68,0.15);
+    color: #f87171;
+    border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* Category pills */
+  .hs-pill {
+    @apply px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all;
+  }
+  .hs-pill-active {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: white;
+    box-shadow: 0 4px 12px rgba(124,58,237,0.4);
+  }
+  .hs-pill-inactive {
+    background: rgba(255,255,255,0.06);
+    color: rgba(196,181,253,0.7);
+    border: 1px solid rgba(167,139,250,0.15);
+  }
+  .hs-pill-inactive:hover {
+    background: rgba(255,255,255,0.1);
+    color: #c4b5fd;
+  }
+
+  /* Scrollbar hide */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Skeleton shimmer */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .skeleton {
+    background: linear-gradient(90deg, #f0ecff 25%, rgba(124,58,237,0.08) 50%, #f0ecff 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+
+  /* الخلفية الرئيسية - أبيض مع لمسة بنفسجية خفيفة */
+  .app-bg {
+    background: #f8f5ff;
+    min-height: 100vh;
+  }
+
+  /* شريط علوي */
+  .app-header {
+    background: rgba(255,255,255,0.92);
+    border-bottom: 1px solid rgba(124,58,237,0.12);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  /* لوحة التحكم - خلفية داكنة أصلية */
+  .admin-bg {
+    background: linear-gradient(135deg, #0f0c29 0%, #1a1040 50%, #0f0c29 100%);
+    min-height: 100vh;
+  }
+
+  /* شريط علوي لوحة التحكم */
+  .admin-header {
+    background: rgba(15,12,41,0.92);
+    border-bottom: 1px solid rgba(124,58,237,0.25);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  /* ===== ثيم صفحات العميل: أبيض فاخر أنيق ===== */
+
+  /* ثيم صفحات العميل: بنفسجي فاتح + أخضر فاتح */
+  /* --primary = بنفسجي فاتح (#a855f7 نحو) | --secondary-color = أخضر فاتح (#22c55e نحو) */
+  .customer-theme {
+    /* اللون الأساسي: بنفسجي #7c3aed موحد */
+    --primary: oklch(0.541 0.247 293.0);
+    --primary-foreground: oklch(1 0 0);
+    /* اللون الثانوي: بنفسجي فاتح */
+    --secondary: oklch(0.94 0.04 293);
+    --secondary-foreground: oklch(0.25 0.08 293);
+    /* اللون المميز: بنفسجي فاتح جداً */
+    --accent: oklch(0.95 0.03 293);
+    --accent-foreground: oklch(0.541 0.247 293.0);
+    /* الخلفية: أبيض مع لمسة بنفسجية خفيفة */
+    --background: oklch(0.978 0.005 295);
+    --foreground: oklch(0.15 0.02 295);
+    /* البطاقات */
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0.02 295);
+    /* القائمة المنبثقة */
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0.02 295);
+    /* المكتوم */
+    --muted: oklch(0.95 0.01 295);
+    --muted-foreground: oklch(0.48 0.03 295);
+    /* التدمير */
+    --destructive: oklch(0.6 0.22 25);
+    --destructive-foreground: oklch(1 0 0);
+    /* الحدود والمدخلات */
+    --border: oklch(0.91 0.02 295);
+    --input: oklch(0.95 0.01 295);
+    --ring: oklch(0.541 0.247 293.0);
+    /* --color-* لضمان عمل Tailwind 4 */
+    --color-primary: oklch(0.541 0.247 293.0);
+    --color-primary-foreground: oklch(1 0 0);
+    --color-secondary: oklch(0.94 0.04 293);
+    --color-secondary-foreground: oklch(0.25 0.08 293);
+    --color-accent: oklch(0.95 0.03 293);
+    --color-accent-foreground: oklch(0.541 0.247 293.0);
+    --color-background: oklch(0.978 0.005 293);
+    --color-foreground: oklch(0.15 0.02 293);
+    --color-card: oklch(1 0 0);
+    --color-card-foreground: oklch(0.15 0.02 293);
+    --color-popover: oklch(1 0 0);
+    --color-popover-foreground: oklch(0.15 0.02 293);
+    --color-muted: oklch(0.95 0.01 293);
+    --color-muted-foreground: oklch(0.48 0.03 293);
+    --color-destructive: oklch(0.6 0.22 25);
+    --color-destructive-foreground: oklch(1 0 0);
+    --color-border: oklch(0.91 0.02 293);
+    --color-input: oklch(0.95 0.01 293);
+    --color-ring: oklch(0.541 0.247 293.0);
+    /* اللون الأساسي للنص والخلفية */
+    color: oklch(0.15 0.02 295);
+    background-color: oklch(0.978 0.005 295);
+  }
+
+  /* قواعد مباشرة لضمان وضوح النصوص في customer-theme */
+  .customer-theme h1,
+  .customer-theme h2,
+  .customer-theme h3,
+  .customer-theme h4,
+  .customer-theme h5,
+  .customer-theme h6 {
+    color: oklch(0.15 0.02 295);
+  }
+  .customer-theme p {
+    color: oklch(0.28 0.02 295);
+  }
+  .customer-theme span:not([class*='text-']) {
+    color: inherit;
+  }
+
+  .customer-bg {
+    background: #f8f5ff;
+    min-height: 100vh;
+  }
+
+  .customer-header {
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid rgba(124,58,237,0.10);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    box-shadow: 0 1px 12px rgba(124,58,237,0.08);
+  }
+
+  .customer-card {
+    background: #ffffff;
+    border: 1px solid rgba(124,58,237,0.09);
+    border-radius: 1.125rem;
+    box-shadow: 0 2px 16px rgba(124,58,237,0.07), 0 1px 4px rgba(124,58,237,0.04);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .customer-card:hover {
+    box-shadow: 0 8px 32px rgba(124,58,237,0.14), 0 2px 8px rgba(124,58,237,0.08);
+    transform: translateY(-2px);
+  }
+
+  .customer-nav {
+    background: rgba(255,255,255,0.98);
+    border-top: 1px solid rgba(124,58,237,0.10);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 -4px 24px rgba(124,58,237,0.09);
+  }
+
+  .customer-input {
+    background: #f8f5ff;
+    border: 1.5px solid #e9d5ff;
+    color: #1a0a2e;
+    border-radius: 0.875rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .customer-input:focus {
+    outline: none;
+    border-color: #7c3aed;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.10);
+  }
+  .customer-input::placeholder {
+    color: rgba(124,58,237,0.4);
+  }
+
+  .customer-pill-active {
+    background: #7c3aed;
+    color: white;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+    border-radius: 9999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .customer-pill-inactive {
+    background: #f5f0ff;
+    color: #7c3aed;
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 9999px;
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .customer-pill-inactive:hover {
+    background: rgba(124,58,237,0.08);
+    color: #7c3aed;
+    border-color: rgba(124,58,237,0.3);
+  }
+
+  .customer-skeleton {
+    background: linear-gradient(90deg, #f5f0ff 25%, rgba(124,58,237,0.1) 50%, #f5f0ff 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+  }
+
+  .customer-badge-success {
+    background: rgba(124,58,237,0.08);
+    color: #7c3aed;
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .customer-badge-warning {
+    background: rgba(124,58,237,0.06);
+    color: #7c3aed;
+    border: 1px solid rgba(124,58,237,0.15);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .customer-badge-danger {
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .customer-badge-purple {
+    background: rgba(124,58,237,0.08);
+    color: #7c3aed;
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 9999px;
+    padding: 0.2rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* ===== ثيم صفحات المندوب: داكن بنفسجي واضح ===== */
+  .driver-theme {
+    --primary: oklch(0.65 0.22 290);
+    --primary-foreground: oklch(1 0 0);
+    --background: oklch(0.10 0.04 280);
+    --foreground: oklch(0.96 0.01 280);
+    --card: oklch(0.16 0.05 280);
+    --card-foreground: oklch(0.96 0.01 280);
+    --muted: oklch(0.20 0.04 280);
+    --muted-foreground: oklch(0.72 0.03 280);
+    --border: oklch(0.30 0.05 280);
+    --input: oklch(0.20 0.04 280);
+    --ring: oklch(0.65 0.22 290);
+    --color-primary: oklch(0.65 0.22 290);
+    --color-foreground: oklch(0.96 0.01 280);
+    --color-muted-foreground: oklch(0.72 0.03 280);
+    color: oklch(0.96 0.01 280);
+  }
+
+  /* نصوص المندوب واضحة */
+  .driver-theme h1, .driver-theme h2, .driver-theme h3,
+  .driver-theme h4, .driver-theme h5, .driver-theme h6 {
+    color: oklch(0.96 0.01 280);
+    font-weight: 700;
+  }
+  .driver-theme p {
+    color: oklch(0.82 0.02 280);
+  }
+  .driver-theme label {
+    color: oklch(0.88 0.02 280);
+    font-weight: 600;
+  }
+
+  /* بطاقة المندوب */
+  .driver-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(167,139,250,0.22);
+    border-radius: 1rem;
+    backdrop-filter: blur(12px);
+  }
+  .driver-card:hover {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(167,139,250,0.38);
+  }
+
+  /* خلفية صفحات المندوب - داكنة بنفسجية */
+  .driver-bg {
+    background: linear-gradient(160deg, #0a0820 0%, #0f0c2e 50%, #0a0820 100%) !important;
+    min-height: 100vh;
+    color: #f0eeff;
+  }
+
+  /* شريط علوي للمندوب */
+  .driver-header {
+    background: rgba(10,8,30,0.95) !important;
+    border-bottom: 1px solid rgba(124,58,237,0.3) !important;
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  /* بطاقة طلب المندوب */
+  .driver-order-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+  .driver-order-card:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(167,139,250,0.35);
+  }
+
+  /* شريط تنقل المندوب */
+  .driver-nav {
+    background: rgba(10,8,30,0.97);
+    border-top: 1px solid rgba(124,58,237,0.25);
+    backdrop-filter: blur(24px);
+  }
+
+  /* pac-container: قائمة اقتراحات Google Places Autocomplete */
+  .pac-container {
+    z-index: 99999 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18) !important;
+    border: 1px solid #e9d5ff !important;
+    font-family: 'Tajawal', 'Cairo', system-ui, sans-serif !important;
+    margin-top: 4px !important;
+    overflow: visible !important;
+  }
+  .pac-item {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    border-top: 1px solid #f3e8ff !important;
+    direction: rtl !important;
+    text-align: right !important;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+  .pac-item:hover,
+  .pac-item-selected {
+    background-color: #f5f0ff !important;
+  }
+  .pac-item-query {
+    font-weight: 700 !important;
+    color: #7c3aed !important;
+    font-size: 14px !important;
+  }
+  .pac-matched {
+    font-weight: 700 !important;
+    color: #7c3aed !important;
+  }
+  .pac-icon {
+    display: none !important;
+  }
+  .pac-logo:after {
+    display: none !important;
+  }
+
+  /* ضمان عمل customer-theme داخل Radix Dialog Portal */
+  [data-radix-portal] .customer-theme,
+  [data-radix-popper-content-wrapper] .customer-theme {
+    --primary: oklch(0.541 0.247 293.0);
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.94 0.04 293);
+    --secondary-foreground: oklch(0.25 0.08 293);
+    --accent: oklch(0.95 0.03 293);
+    --accent-foreground: oklch(0.541 0.247 293.0);
+    --background: oklch(0.978 0.005 293);
+    --foreground: oklch(0.15 0.02 293);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0.02 293);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0.02 293);
+    --muted: oklch(0.95 0.01 293);
+    --muted-foreground: oklch(0.48 0.03 293);
+    --border: oklch(0.91 0.02 293);
+    --input: oklch(0.95 0.01 293);
+    --ring: oklch(0.541 0.247 293.0);
+    /* --color-* لضمان Tailwind 4 */
+    --color-primary: oklch(0.541 0.247 293.0);
+    --color-primary-foreground: oklch(1 0 0);
+    --color-secondary: oklch(0.94 0.04 293);
+    --color-secondary-foreground: oklch(0.25 0.08 293);
+    --color-accent: oklch(0.95 0.03 293);
+    --color-accent-foreground: oklch(0.541 0.247 293.0);
+    --color-background: oklch(0.978 0.005 293);
+    --color-foreground: oklch(0.15 0.02 293);
+    --color-card: oklch(1 0 0);
+    --color-card-foreground: oklch(0.15 0.02 293);
+    --color-popover: oklch(1 0 0);
+    --color-popover-foreground: oklch(0.15 0.02 293);
+    --color-muted: oklch(0.95 0.01 293);
+    --color-muted-foreground: oklch(0.48 0.03 293);
+    --color-border: oklch(0.91 0.02 293);
+    --color-input: oklch(0.95 0.01 293);
+    --color-ring: oklch(0.541 0.247 293.0);
+    color: oklch(0.15 0.02 295);
+    background-color: oklch(1 0 0);
+  }
+}

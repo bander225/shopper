@@ -1,0 +1,9 @@
+{
+  "query": "\nCREATE TABLE `systemSettings` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `key` varchar(100) NOT NULL,\n  `value` text NOT NULL,\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `systemSettings_id` PRIMARY KEY(`id`),\n  CONSTRAINT `systemSettings_key_unique` UNIQUE(`key`)\n);\n\nINSERT INTO `systemSettings` (`key`, `value`) VALUES ('autoAssignDrivers', 'true');\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \nCREATE TABLE `systemSettings` (\n  `id` int AUTO_INCREMENT NOT NULL,\n  `key` varchar(100) NOT NULL,\n  `value` text NOT NULL,\n  `updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n  CONSTRAINT `systemSettings_id` PRIMARY KEY(`id`),\n  CONSTRAINT `systemSettings_key_unique` UNIQUE(`key`)\n);\n\nINSERT INTO `systemSettings` (`key`, `value`) VALUES ('autoAssignDrivers', 'true');\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1979
+}

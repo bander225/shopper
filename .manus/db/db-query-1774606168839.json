@@ -1,0 +1,20 @@
+{
+  "query": "SELECT id, name, phone, isOnline, isAvailable, cityId, streetId, inRestaurantId FROM drivers;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, phone, isOnline, isAvailable, cityId, streetId, inRestaurantId FROM drivers;",
+  "rows": [
+    {
+      "id": "90001",
+      "name": "عبدالمجيد",
+      "phone": "0557000000",
+      "isOnline": "0",
+      "isAvailable": "1",
+      "cityId": "1",
+      "streetId": "1",
+      "inRestaurantId": "30001"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tphone\tisOnline\tisAvailable\tcityId\tstreetId\tinRestaurantId\n90001\tعبدالمجيد\t0557000000\t0\t1\t1\t1\t30001\n",
+  "stderr": "",
+  "execution_time_ms": 1570
+}

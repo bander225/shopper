@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, phone, name, role FROM phoneUsers WHERE role = 'driver' OR phone LIKE '055%' LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, phone, name, role FROM phoneUsers WHERE role = 'driver' OR phone LIKE '055%' LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "phone": "0557392919",
+      "name": "خالد",
+      "role": "customer"
+    },
+    {
+      "id": "30001",
+      "phone": "0557222222",
+      "name": "تعا",
+      "role": "customer"
+    },
+    {
+      "id": "30002",
+      "phone": "0557888888",
+      "name": "ببب",
+      "role": "driver"
+    },
+    {
+      "id": "60001",
+      "phone": "0557000000",
+      "name": "Salm",
+      "role": "driver"
+    },
+    {
+      "id": "90001",
+      "phone": "0557666666",
+      "name": "Band",
+      "role": "driver"
+    },
+    {
+      "id": "120001",
+      "phone": "0557010101",
+      "name": "Ok",
+      "role": "customer"
+    },
+    {
+      "id": "120002",
+      "phone": "0558585855",
+      "name": "يث",
+      "role": "customer"
+    },
+    {
+      "id": "120003",
+      "phone": "055474444",
+      "name": "سيب",
+      "role": "customer"
+    },
+    {
+      "id": "150001",
+      "phone": "055212121",
+      "name": "يا",
+      "role": "customer"
+    },
+    {
+      "id": "180001",
+      "phone": "0557123123",
+      "name": "ريم",
+      "role": "customer"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tphone\tname\trole\n1\t0557392919\tخالد\tcustomer\n30001\t0557222222\tتعا\tcustomer\n30002\t0557888888\tببب\tdriver\n60001\t0557000000\tSalm\tdriver\n90001\t0557666666\tBand\tdriver\n120001\t0557010101\tOk\tcustomer\n120002\t0558585855\tيث\tcustomer\n120003\t055474444\tسيب\tcustomer\n150001\t055212121\tيا\tcustomer\n180001\t0557123123\tريم\tcustomer\n",
+  "stderr": "",
+  "execution_time_ms": 1664
+}

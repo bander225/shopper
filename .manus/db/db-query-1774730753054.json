@@ -1,0 +1,26 @@
+{
+  "query": "SELECT id, name, isOpen, isAcceptingOrders, streetId, cityId FROM restaurants ORDER BY id LIMIT 20;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isOpen, isAcceptingOrders, streetId, cityId FROM restaurants ORDER BY id LIMIT 20;",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "هاف مليون",
+      "isOpen": "1",
+      "isAcceptingOrders": "0",
+      "streetId": "1",
+      "cityId": "1"
+    },
+    {
+      "id": "30002",
+      "name": "ماكدونالدز ",
+      "isOpen": "1",
+      "isAcceptingOrders": "0",
+      "streetId": "1",
+      "cityId": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisOpen\tisAcceptingOrders\tstreetId\tcityId\n30001\tهاف مليون\t1\t0\t1\t1\n30002\tماكدونالدز \t1\t0\t1\t1\n",
+  "stderr": "",
+  "execution_time_ms": 1537
+}

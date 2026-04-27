@@ -1,0 +1,8 @@
+{
+  "query": "\n-- إضافة المدن الجديدة (إذا لم تكن موجودة)\nINSERT IGNORE INTO cities (name, is_active, created_at) VALUES\n('بريدة', 1, NOW()),\n('عنيزة', 1, NOW()),\n('الأسياح', 1, NOW()),\n('قبة', 1, NOW()),\n('عيون الجواء', 1, NOW());\n\n-- جلب IDs المدن\nSELECT id, name FROM cities;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \n-- إضافة المدن الجديدة (إذا لم تكن موجودة)\nINSERT IGNORE INTO cities (name, is_active, created_at) VALUES\n('بريدة', 1, NOW()),\n('عنيزة', 1, NOW()),\n('الأسياح', 1, NOW()),\n('قبة', 1, NOW()),\n('عيون الجواء', 1, NOW());\n\n-- جلب IDs المدن\nSELECT id, name FROM cities;\n",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 3: Unknown column 'is_active' in 'field list'"
+  ]
+}

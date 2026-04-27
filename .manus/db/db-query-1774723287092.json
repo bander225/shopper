@@ -1,0 +1,34 @@
+{
+  "query": "SELECT id, name, isOpen, isAcceptingOrders FROM restaurants; SELECT id, name, isActive FROM googlePlaceRestaurants LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isOpen, isAcceptingOrders FROM restaurants; SELECT id, name, isActive FROM googlePlaceRestaurants LIMIT 10;",
+  "rows": [
+    {
+      "id": "30001",
+      "name": "هاف مليون",
+      "isOpen": "1",
+      "isAcceptingOrders": "0"
+    },
+    {
+      "id": "30002",
+      "name": "ماكدونالدز ",
+      "isOpen": "1",
+      "isAcceptingOrders": "0"
+    }
+  ],
+  "messages": [
+    "id\tname\tisActive",
+    "1\tلوفت LOFT\t0",
+    "2\tمطعم الميار\t0",
+    "3\tقونيش كيك وكوفي البخاري\t0",
+    "4\tواقيو برجر\t0",
+    "5\tمطعم بيراديز الهندي - بريده peradiz\t0",
+    "6\tكافيه كلن | KIn Café\t0",
+    "7\tلحظات جميلة\t0",
+    "8\tمطعم كراتر\t0",
+    "9\tفينور\t0",
+    "10\tفيولا\t0"
+  ],
+  "stdout": "id\tname\tisOpen\tisAcceptingOrders\n30001\tهاف مليون\t1\t0\n30002\tماكدونالدز \t1\t0\nid\tname\tisActive\n1\tلوفت LOFT\t0\n2\tمطعم الميار\t0\n3\tقونيش كيك وكوفي البخاري\t0\n4\tواقيو برجر\t0\n5\tمطعم بيراديز الهندي - بريده peradiz\t0\n6\tكافيه كلن | KIn Café\t0\n7\tلحظات جميلة\t0\n8\tمطعم كراتر\t0\n9\tفينور\t0\n10\tفيولا\t0\n",
+  "stderr": "",
+  "execution_time_ms": 1847
+}

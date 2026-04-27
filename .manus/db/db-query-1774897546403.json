@@ -1,0 +1,60 @@
+{
+  "query": "SELECT id, name, isActive, isCovered, deliveryFee, centerLat, centerLng, radiusKm FROM cities ORDER BY isCovered DESC, isActive DESC;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isActive, isCovered, deliveryFee, centerLat, centerLng, radiusKm FROM cities ORDER BY isCovered DESC, isActive DESC;",
+  "rows": [
+    {
+      "id": "60001",
+      "name": "الاسياح",
+      "isActive": "1",
+      "isCovered": "1",
+      "deliveryFee": "50.00",
+      "centerLat": "26.7728230",
+      "centerLng": "44.2101980",
+      "radiusKm": "50.00"
+    },
+    {
+      "id": "1",
+      "name": "بريدة",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "0.00",
+      "centerLat": "26.3260000",
+      "centerLng": "43.9750000",
+      "radiusKm": "25.00"
+    },
+    {
+      "id": "2",
+      "name": "عنيزة",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "0.00",
+      "centerLat": "26.0833000",
+      "centerLng": "43.9833000",
+      "radiusKm": "20.00"
+    },
+    {
+      "id": "30003",
+      "name": "قبة",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "60.00",
+      "centerLat": "27.3817280",
+      "centerLng": "44.3817190",
+      "radiusKm": "10.00"
+    },
+    {
+      "id": "30004",
+      "name": "عيون الجواء",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "0.00",
+      "centerLat": "26.5167000",
+      "centerLng": "43.7833000",
+      "radiusKm": "15.00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisActive\tisCovered\tdeliveryFee\tcenterLat\tcenterLng\tradiusKm\n60001\tالاسياح\t1\t1\t50.00\t26.7728230\t44.2101980\t50.00\n1\tبريدة\t1\t0\t0.00\t26.3260000\t43.9750000\t25.00\n2\tعنيزة\t1\t0\t0.00\t26.0833000\t43.9833000\t20.00\n30003\tقبة\t1\t0\t60.00\t27.3817280\t44.3817190\t10.00\n30004\tعيون الجواء\t1\t0\t0.00\t26.5167000\t43.7833000\t15.00\n",
+  "stderr": "",
+  "execution_time_ms": 1607
+}

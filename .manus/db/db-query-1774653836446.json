@@ -1,0 +1,30 @@
+{
+  "query": "SELECT id, name FROM cities ORDER BY id",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name FROM cities ORDER BY id",
+  "rows": [
+    {
+      "id": "1",
+      "name": "بريدة"
+    },
+    {
+      "id": "2",
+      "name": "عنيزة"
+    },
+    {
+      "id": "30002",
+      "name": "الأسياح"
+    },
+    {
+      "id": "30003",
+      "name": "قبة"
+    },
+    {
+      "id": "30004",
+      "name": "عيون الجواء"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\n1\tبريدة\n2\tعنيزة\n30002\tالأسياح\n30003\tقبة\n30004\tعيون الجواء\n",
+  "stderr": "",
+  "execution_time_ms": 1542
+}

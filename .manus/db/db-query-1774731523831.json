@@ -1,0 +1,170 @@
+{
+  "query": "\n-- المطاعم اليدوية المفعّلة لكل شارع\nSELECT s.id as streetId, s.name as streetName, \n  COUNT(r.id) as manualCount\nFROM streets s\nLEFT JOIN restaurants r ON r.streetId = s.id AND r.isAcceptingOrders = 1 AND r.isOpen = 1\nGROUP BY s.id, s.name\nORDER BY s.id;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute \n-- المطاعم اليدوية المفعّلة لكل شارع\nSELECT s.id as streetId, s.name as streetName, \n  COUNT(r.id) as manualCount\nFROM streets s\nLEFT JOIN restaurants r ON r.streetId = s.id AND r.isAcceptingOrders = 1 AND r.isOpen = 1\nGROUP BY s.id, s.name\nORDER BY s.id;\n",
+  "rows": [
+    {
+      "streetId": "30001",
+      "streetName": "شارع البخاري",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30002",
+      "streetName": "طريق عثمان بن عفان",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30003",
+      "streetName": "شارع الملك فهد",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30004",
+      "streetName": "شارع الأمير سلطان",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30005",
+      "streetName": "شارع الصناعة",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30006",
+      "streetName": "شارع المشاغل",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30007",
+      "streetName": "شارع المياه",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30008",
+      "streetName": "طريق الملك عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30009",
+      "streetName": "شارع الزاهر",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30010",
+      "streetName": "شارع الأمير سلطان بن عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30011",
+      "streetName": "شارع الشيخ محمد بن عثيمين",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30012",
+      "streetName": "شارع الملك عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30013",
+      "streetName": "جادة النخيل",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30014",
+      "streetName": "طريق عمر بن الخطاب",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30015",
+      "streetName": "شارع الملك فهد",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30016",
+      "streetName": "طريق الملك عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30017",
+      "streetName": "شارع محمد بن عبدالعزيز الفهيد",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30018",
+      "streetName": "شارع الأمير سلطان بن عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30019",
+      "streetName": "شارع الملك فيصل",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30020",
+      "streetName": "شارع أبي بكر الصديق",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30021",
+      "streetName": "شارع عمر بن الخطاب",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30022",
+      "streetName": "طريق الملك عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30023",
+      "streetName": "شارع الملك فهد",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30024",
+      "streetName": "شارع الأمير سلطان بن عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30025",
+      "streetName": "شارع عثمان بن عفان",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30026",
+      "streetName": "شارع عمر بن الخطاب",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30027",
+      "streetName": "طريق الملك عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30028",
+      "streetName": "طريق الملك فهد",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30029",
+      "streetName": "شارع الأمير سلطان بن عبدالعزيز",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30030",
+      "streetName": "شارع عثمان بن عفان",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30031",
+      "streetName": "شارع علي بن أبي طالب",
+      "manualCount": "0"
+    },
+    {
+      "streetId": "30032",
+      "streetName": "شارع عمر بن الخطاب",
+      "manualCount": "0"
+    }
+  ],
+  "messages": [],
+  "stdout": "streetId\tstreetName\tmanualCount\n30001\tشارع البخاري\t0\n30002\tطريق عثمان بن عفان\t0\n30003\tشارع الملك فهد\t0\n30004\tشارع الأمير سلطان\t0\n30005\tشارع الصناعة\t0\n30006\tشارع المشاغل\t0\n30007\tشارع المياه\t0\n30008\tطريق الملك عبدالعزيز\t0\n30009\tشارع الزاهر\t0\n30010\tشارع الأمير سلطان بن عبدالعزيز\t0\n30011\tشارع الشيخ محمد بن عثيمين\t0\n30012\tشارع الملك عبدالعزيز\t0\n30013\tجادة النخيل\t0\n30014\tطريق عمر بن الخطاب\t0\n30015\tشارع الملك فهد\t0\n30016\tطريق الملك عبدالعزيز\t0\n30017\tشارع محمد بن عبدالعزيز الفهيد\t0\n30018\tشارع الأمير سلطان بن عبدالعزيز\t0\n30019\tشارع الملك فيصل\t0\n30020\tشارع أبي بكر الصديق\t0\n30021\tشارع عمر بن الخطاب\t0\n30022\tطريق الملك عبدالعزيز\t0\n30023\tشارع الملك فهد\t0\n30024\tشارع الأمير سلطان بن عبدالعزيز\t0\n30025\tشارع عثمان بن عفان\t0\n30026\tشارع عمر بن الخطاب\t0\n30027\tطريق الملك عبدالعزيز\t0\n30028\tطريق الملك فهد\t0\n30029\tشارع الأمير سلطان بن عبدالعزيز\t0\n30030\tشارع عثمان بن عفان\t0\n30031\tشارع علي بن أبي طالب\t0\n30032\tشارع عمر بن الخطاب\t0\n",
+  "stderr": "",
+  "execution_time_ms": 1510
+}

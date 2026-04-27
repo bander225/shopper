@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `googlePlaceRestaurants` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`placeId` varchar(255) NOT NULL,\n\t`name` varchar(255) NOT NULL,\n\t`address` text,\n\t`cityId` int,\n\t`streetId` int,\n\t`photoRef` text,\n\t`rating` decimal(3,2),\n\t`userRatingsTotal` int DEFAULT 0,\n\t`types` text,\n\t`isActive` boolean NOT NULL DEFAULT false,\n\t`isOpen` boolean,\n\t`discountEnabled` boolean NOT NULL DEFAULT false,\n\t`discountPercent` int DEFAULT 0,\n\t`discountLabel` varchar(100),\n\t`discountExpiresAt` timestamp,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `googlePlaceRestaurants_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `googlePlaceRestaurants_placeId_unique` UNIQUE(`placeId`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute CREATE TABLE `googlePlaceRestaurants` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`placeId` varchar(255) NOT NULL,\n\t`name` varchar(255) NOT NULL,\n\t`address` text,\n\t`cityId` int,\n\t`streetId` int,\n\t`photoRef` text,\n\t`rating` decimal(3,2),\n\t`userRatingsTotal` int DEFAULT 0,\n\t`types` text,\n\t`isActive` boolean NOT NULL DEFAULT false,\n\t`isOpen` boolean,\n\t`discountEnabled` boolean NOT NULL DEFAULT false,\n\t`discountPercent` int DEFAULT 0,\n\t`discountLabel` varchar(100),\n\t`discountExpiresAt` timestamp,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `googlePlaceRestaurants_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `googlePlaceRestaurants_placeId_unique` UNIQUE(`placeId`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1765
+}

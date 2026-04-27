@@ -1,0 +1,2 @@
+ALTER TABLE `googlePlaceRestaurants` ADD `driverAssignMode` enum('manual','street','nearest') DEFAULT 'manual' NOT NULL;--> statement-breakpoint
+ALTER TABLE `restaurants` ADD `driverAssignMode` enum('manual','street','nearest') DEFAULT 'manual' NOT NULL;

@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, name, isActive, isCovered, deliveryFee FROM cities;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KsiW6Qbmpv9cc9.a9e99b377716 --database NK9L9naBDDKkTQDnwgY78j --execute SELECT id, name, isActive, isCovered, deliveryFee FROM cities;",
+  "rows": [
+    {
+      "id": "1",
+      "name": "بريدة",
+      "isActive": "0",
+      "isCovered": "0",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "2",
+      "name": "عنيزة",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "30003",
+      "name": "قبة",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "60.00"
+    },
+    {
+      "id": "30004",
+      "name": "عيون الجواء",
+      "isActive": "1",
+      "isCovered": "0",
+      "deliveryFee": "0.00"
+    },
+    {
+      "id": "60001",
+      "name": "الاسياح",
+      "isActive": "0",
+      "isCovered": "1",
+      "deliveryFee": "50.00"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\tisActive\tisCovered\tdeliveryFee\n1\tبريدة\t0\t0\t0.00\n2\tعنيزة\t1\t0\t0.00\n30003\tقبة\t1\t0\t60.00\n30004\tعيون الجواء\t1\t0\t0.00\n60001\tالاسياح\t0\t1\t50.00\n",
+  "stderr": "",
+  "execution_time_ms": 1591
+}

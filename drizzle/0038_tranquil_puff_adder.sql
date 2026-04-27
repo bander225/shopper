@@ -1,0 +1,1 @@
+ALTER TABLE `shopperBookings` ADD `needsInvoice` boolean DEFAULT false NOT NULL;
